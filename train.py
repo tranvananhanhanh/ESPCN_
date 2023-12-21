@@ -58,29 +58,26 @@ for epoch in range(num_epochs):
             val_total_loss += val_loss.item()
             val_total_psnr += val_batch_psnr.item()
 
-        # Calculate average validation loss and PSNR
         val_average_loss = val_total_loss / len(val_loader)
         val_average_psnr = val_total_psnr / len(val_loader)
         val_loss_history.append(val_average_loss)
         val_psnr_history.append(val_average_psnr)
 
-        # Print and store the average loss and PSNR after each epoch for validation
+        
         print(f'Validation - Epoch {epoch + 1}/{num_epochs}, Avg. Loss: {val_average_loss}, Avg. PSNR: {val_average_psnr}')
 
-# Save the model
+
 torch.save(model.state_dict(), 'my_model.pth')
 
-# Plotting the loss and PSNR curves
 plt.figure(figsize=(12, 4))
 
-# Plotting the training loss curve
+
 plt.subplot(1, 2, 1)
 plt.plot(train_loss_history, label='Training Loss')
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.legend()
 
-# Plotting the training PSNR curve
 plt.subplot(1, 2, 2)
 plt.plot(train_psnr_history, label='Training PSNR')
 plt.xlabel('Epoch')
@@ -90,17 +87,16 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-# Plotting the validation loss and PSNR curves
+
 plt.figure(figsize=(12, 4))
 
-# Plotting the validation loss curve
 plt.subplot(1, 2, 1)
 plt.plot(val_loss_history, label='Validation Loss')
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.legend()
 
-# Plotting the validation PSNR curve
+
 plt.subplot(1, 2, 2)
 plt.plot(val_psnr_history, label='Validation PSNR')
 plt.xlabel('Epoch')
