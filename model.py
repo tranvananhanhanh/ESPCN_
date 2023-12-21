@@ -50,7 +50,7 @@ class ESPCN(nn.Module):
     def forward(self, x: Tensor) -> Tensor:
         return self._forward_impl(x)
 
-    # Support torch.script function.
+
     def _forward_impl(self, x: Tensor) -> Tensor:
         x = self.feature_maps(x)
         x = self.sub_pixel(x)
@@ -64,15 +64,15 @@ def espcn_x4(**kwargs) -> ESPCN:
 
     return model
 
-in_channels = 3  # Assuming input images have 3 channels (e.g., RGB)
-out_channels = 3  # Adjust based on your requirements
+in_channels = 3  
+out_channels = 3  
 
-# Create an instance of the ESPCN model with the desired parameters
+
 model = espcn_x4(
     in_channels=in_channels,
     out_channels=out_channels,
     channels=64,  
 )
 
-# Print the model architecture
+
 print(model)

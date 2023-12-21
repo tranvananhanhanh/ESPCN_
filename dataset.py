@@ -38,10 +38,9 @@ class MyBlurredDataset(Dataset):
 
 image_path = "/Users/jmac/Desktop/ESPCN/resizee"
 
-# Tạo dataset
+
 blurred_dataset = MyBlurredDataset(image_path)
 
-# Tạo DataLoader
 blurred_dataloader = DataLoader(blurred_dataset, batch_size=8, shuffle=True)
 
 for downsampled_images, blurred_images in blurred_dataloader:
@@ -55,10 +54,8 @@ train_size = int(0.6 * total_size)  # 60% for training
 val_size = int(0.2 * total_size)    # 20% for validation
 test_size = total_size - train_size - val_size  # Remaining 20% for testing
 
-# Use random_split to split the DataLoader into train_loader, val_loader, and test_loader
 train_dataset, val_dataset, test_dataset = random_split(blurred_dataloader.dataset, [train_size, val_size, test_size])
 
-# Create DataLoader for training, validation, and testing
 train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=8, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False)

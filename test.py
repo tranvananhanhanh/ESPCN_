@@ -4,15 +4,15 @@ from train import model
 from train import PSNR
 import torch.nn as nn
 from model import model
-# Assuming your model is an instance of the ESPCN class
 
-# Load the state dictionary
+
+
 model.load_state_dict(torch.load('/Users/jmac/Desktop/ESPCN/my_model.pth'))
 
 criterion = nn.MSELoss()
 
 def evaluate(model, test_loader, criterion):
-    model.eval()  # Switch to evaluation mode
+    model.eval()  
     total_loss = 0
     total_psnr = 0
 
@@ -29,5 +29,5 @@ def evaluate(model, test_loader, criterion):
     avg_psnr = total_psnr / len(test_loader.dataset)
     print(f'Test Loss: {avg_loss:.4f}, PSNR: {avg_psnr:.2f}')
 
-# Call the evaluate function
+
 evaluate(model, test_loader, criterion)

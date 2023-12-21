@@ -1,5 +1,5 @@
 from torch.utils.data import random_split
-from dataset import train_loader, val_loader  # Assuming you have a val_loader
+from dataset import train_loader, val_loader  
 from torch.utils.data import DataLoader
 from model import model
 import torch.optim as optim
@@ -21,38 +21,31 @@ val_loss_history = []
 val_psnr_history = []
 
 for epoch in range(num_epochs):
-    # Set the model to training mode
     model.train()
 
     total_loss = 0.0
     total_psnr = 0.0
 
     for inputs, targets in train_loader:
-        # Zero gradients, forward pass, compute loss, backward pass, optimize
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
 
-        # Calculate PSNR for the current batch
         batch_psnr = PSNR(outputs, targets)
         total_psnr += batch_psnr.item()
 
-        # Update total loss for the epoch
         total_loss += loss.item()
 
-    # Calculate average loss and PSNR for the epoch
     average_loss = total_loss / len(train_loader)
     average_psnr = total_psnr / len(train_loader)
     train_loss_history.append(average_loss)
     train_psnr_history.append(average_psnr)
 
-    # Print and store the average loss and PSNR after each epoch for training
     print(f'Training - Epoch {epoch + 1}/{num_epochs}, Avg. Loss: {average_loss}, Avg. PSNR: {average_psnr}')
 
-    # Validation loop
-    model.eval()  # Set the model to evaluation mode
+    model.eval()  
     with torch.no_grad():
         val_total_loss = 0.0
         val_total_psnr = 0.0
